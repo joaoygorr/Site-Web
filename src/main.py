@@ -3,6 +3,8 @@ app = Flask(__name__)
 
 list_user = []
 
+app.config['SECRET_KEY'] = '8a8a95c229ba363bbfd4b6d538e65241'
+
 @app.route("/")
 def home():
     return render_template("home.html")
