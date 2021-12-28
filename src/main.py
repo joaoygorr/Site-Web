@@ -1,4 +1,5 @@
 from flask import Flask, render_template, url_for
+from forms import FormSignIn, FormSignUp
 app = Flask(__name__)
 
 list_user = []
@@ -19,7 +20,9 @@ def user():
 
 @app.route("/login")
 def login(): 
-    return render_template("login.html")
+    form_SignIn = FormSignIn()
+    form_SignUp = FormSignUp()
+    return render_template("login.html", form_SignIn=form_SignIn, form_SignUp=form_SignUp)
     
 if __name__ == "__main__": 
     app.run(debug=True)

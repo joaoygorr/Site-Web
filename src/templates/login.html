@@ -1,13 +1,58 @@
 {% extends 'base.html' %}
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <h1>sign in</h1>
-            </div>
-            <div class="col">
-                <h1>sign up</h1>
-            </div>
+<div class="container">
+    <h1>Sign in or create your account</h1>
+    <hr>
+    <div class="row">
+        <div class="col">
+            <form action="#" method="POST" class="border p-4 mt-2">
+                <legend>Sign In</legend>
+                <fieldset>
+                    <div class="form-group">
+                        {{ form_SignIn.email.label(class="form-label") }}
+                        {{ form_SignIn.email(class="form-control", placeholder="name@example.com" ) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_SignIn.password.label(class="form-label") }}
+                        {{ form_SignIn.password(class="form-control") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_SignIn.remember_me(class="form-check-input") }}
+                        {{ form_SignIn.remember_me.label(class="form-check-label") }}
+                    </div>
+                </fieldset>
+                <div class="d-grid gap-2 col-3 mx-auto mt-2">
+                {{ form_SignIn.button_submit(class="btn btn-outline-primary") }}
+                </div>
+            </form>
+
+        </div>
+        <div class="col">
+            <form action="#" method="POST" class="border p-4 mt-2">
+                <legend>sign up</legend>
+                <fieldset>
+                    <div class="form-group">
+                        {{ form_SignUp.username.label(class="form-label") }}
+                        {{ form_SignUp.username(class="form-control") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_SignUp.email.label(class="form-label", placeholder="name@example.com") }}
+                        {{ form_SignUp.email(class="form-control") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_SignUp.password.label(class="form-label") }}
+                        {{ form_SignUp.password(class="form-control") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_SignUp.confirm.label(class="form-label") }}
+                        {{ form_SignUp.confirm(class="form-control") }}
+                    </div>
+                </fieldset>
+                <div class="d-grid gap-2 col-3 mx-auto mt-3">
+                    {{ form_SignUp.button_submit(class="btn btn-outline-primary") }}
+                </div>
+            </form>
         </div>
     </div>
+</div>
 {% endblock body %}
