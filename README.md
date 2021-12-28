@@ -5,8 +5,8 @@
 #### python -m venv env
 
 ### Ative o ambiente virtual
-#### .\env\scripts\active.ps1 (powershell)
-#### .\env\scripts\active.bat (cmd)
+#### .\env\scripts\activate.ps1 (powershell)
+#### .\env\scripts\activate.bat (cmd)
 
 ### Instale as dependências
 #### pip install -r requirements.txt
