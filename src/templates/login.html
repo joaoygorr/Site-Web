@@ -6,7 +6,8 @@
     <div class="row">
         <div class="col">
             <form action="#" method="POST" class="border p-4 mt-2">
-                <legend>Sign In</legend>
+                {{ form_SignIn.csrf_token }}
+                <legend class="text-center">Sign In</legend>
                 <fieldset>
                     <div class="form-group">
                         {{ form_SignIn.email.label(class="form-label") }}
@@ -22,14 +23,15 @@
                     </div>
                 </fieldset>
                 <div class="d-grid gap-2 col-3 mx-auto mt-2">
-                {{ form_SignIn.button_submit(class="btn btn-outline-primary") }}
+                {{ form_SignIn.button_submitIn(class="btn btn-outline-primary") }}
                 </div>
             </form>
 
         </div>
         <div class="col">
             <form action="#" method="POST" class="border p-4 mt-2">
-                <legend>sign up</legend>
+                {{form_SignUp.csrf_token}}
+                <legend class="text-center">sign up</legend>
                 <fieldset>
                     <div class="form-group">
                         {{ form_SignUp.username.label(class="form-label") }}
@@ -49,7 +51,7 @@
                     </div>
                 </fieldset>
                 <div class="d-grid gap-2 col-3 mx-auto mt-3">
-                    {{ form_SignUp.button_submit(class="btn btn-outline-primary") }}
+                    {{ form_SignUp.button_submitUp(class="btn btn-outline-primary") }}
                 </div>
             </form>
         </div>
