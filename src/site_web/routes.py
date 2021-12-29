@@ -42,7 +42,7 @@ def login():
         database.session.add(user)
         database.session.commit()
         # Mensagem
-        flash(f"Account Successfully Created For Email: {form_SignUp.email.data}", "alert")
+        flash(f"Account Successfully Created For Email: {form_SignUp.email.data}", "alert alert-success")
         # Redirecionando
         return redirect(url_for("home"))
     
