@@ -22,7 +22,7 @@ def login():
     
     if form_SignIn.validate_on_submit() and 'button_submitIn' in request.form: # Login realizado
         # Mensagem
-        flash(f"login successfully in email: {form_SignIn.email.data}", "alert")
+        flash(f"Login Successfully In Email: {form_SignIn.email.data}", "alert")
         # Redirecionando 
         return redirect(url_for("home"))
 
@@ -34,7 +34,7 @@ def login():
         database.session.add(user)
         database.session.commit()
         # Mensagem
-        flash(f"account successfully created for email: {form_SignUp.email.data}", "alert")
+        flash(f"Account Successfully Created For Email: {form_SignUp.email.data}", "alert")
         # Redirecionando
         return redirect(url_for("home"))
     
