@@ -5,7 +5,7 @@
     <hr>
     <div class="row">
         <div class="col">
-            <form action="#" method="POST" class="border p-4 mt-1">
+            <form action="#" method="POST" class="border p-4 mt-1 bg-dark text-white rounded">
                 {{ form_SignIn.csrf_token }}
                 <legend class="text-center">Sign In</legend>
                 <fieldset>
@@ -20,29 +20,27 @@
                                 </div>
                             {% else %}
                                 {{ form_SignIn.email(class="form-control", placeholder="name@example.com" ) }}
-
                             {% endif %}
                     </div>
-
                     <div class="form-group">
                         {{ form_SignIn.password.label(class="form-label") }}
                         {{ form_SignIn.password(class="form-control") }}
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         {{ form_SignIn.remember_me(class="form-check-input") }}
                         {{ form_SignIn.remember_me.label(class="form-check-label") }}
                     </div>
                 </fieldset>
                 <div class="d-grid gap-2 col-3 mx-auto mt-2">
-                {{ form_SignIn.button_submitIn(class="btn btn-outline-primary") }}
+                    {{ form_SignIn.button_submitIn(class="btn btn-outline-primary") }}
                 </div>
             </form>
         </div>
 
         <div class="col">
-            <form action="#" method="POST" class="border p-4 mt-1">
+            <form action="#" method="POST" class="border p-4 mt-1 bg-dark text-white rounded">
                 {{form_SignUp.csrf_token}}
-                <legend class="text-center">sign up</legend>
+                <legend class="text-center">Sign Up</legend>
                 <fieldset>
                     <div class="form-group">
                         {{ form_SignUp.username.label(class="form-label") }}
