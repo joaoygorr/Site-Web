@@ -1,5 +1,5 @@
 from flask import render_template, redirect, request, url_for, flash
-from site_web import app, database
+from site_web import app, database, bcrypt
 from site_web.forms import FormSignIn, FormSignUp
 from site_web.models import User
 
@@ -27,8 +27,10 @@ def login():
         return redirect(url_for("home"))
 
     if form_SignUp.validate_on_submit() and 'button_submitUp' in request.form:  # Conta criada
+        # Criptografando senha 
+        password_cript = bcrypt.generate_password_hash(form_SignUp.password.data)
         # Criando usuário
-        user = User(username=form_SignUp.username.data, email=form_SignUp.email.data, password=form_SignUp.password.data)
+        user = User(username=form_SignUp.username.data, email=form_SignUp.email.data, password=password_cript)
         database.session.add(user)
         database.session.commit()
         # Mensagem
