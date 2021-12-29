@@ -1,18 +1,29 @@
 {% extends 'base.html' %}
 {% block body %}
 <div class="container">
-    <h1>Sign in or create your account</h1>
+    <h1 class="text-center fw-normal">Sign in or create your account</h1>
     <hr>
     <div class="row">
         <div class="col">
-            <form action="#" method="POST" class="border p-4 mt-2">
+            <form action="#" method="POST" class="border p-4 mt-1">
                 {{ form_SignIn.csrf_token }}
                 <legend class="text-center">Sign In</legend>
                 <fieldset>
                     <div class="form-group">
                         {{ form_SignIn.email.label(class="form-label") }}
-                        {{ form_SignIn.email(class="form-control", placeholder="name@example.com" ) }}
+                            {% if form_SignIn.email.errors %}
+                                {{ form_SignIn.email(class="form-control is-invalid", placeholder="name@example.com" ) }}
+                                <div class="invalid-feedback">
+                                    {% for erro in form_SignIn.email.errors %}
+                                        {{ erro }}
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form_SignIn.email(class="form-control", placeholder="name@example.com" ) }}
+
+                            {% endif %}
                     </div>
+
                     <div class="form-group">
                         {{ form_SignIn.password.label(class="form-label") }}
                         {{ form_SignIn.password(class="form-control") }}
@@ -26,10 +37,10 @@
                 {{ form_SignIn.button_submitIn(class="btn btn-outline-primary") }}
                 </div>
             </form>
-
         </div>
+
         <div class="col">
-            <form action="#" method="POST" class="border p-4 mt-2">
+            <form action="#" method="POST" class="border p-4 mt-1">
                 {{form_SignUp.csrf_token}}
                 <legend class="text-center">sign up</legend>
                 <fieldset>
@@ -39,7 +50,16 @@
                     </div>
                     <div class="form-group">
                         {{ form_SignUp.email.label(class="form-label", placeholder="name@example.com") }}
-                        {{ form_SignUp.email(class="form-control") }}
+                            {% if form_SignUp.email.errors %}
+                                {{ form_SignUp.email(class="form-control is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for erro in form_SignUp.email.errors  %}
+                                        {{ erro }}                                        
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                    {{ form_SignUp.email(class="form-control") }}
+                            {% endif %}
                     </div>
                     <div class="form-group">
                         {{ form_SignUp.password.label(class="form-label") }}
@@ -47,7 +67,16 @@
                     </div>
                     <div class="form-group">
                         {{ form_SignUp.confirm.label(class="form-label") }}
-                        {{ form_SignUp.confirm(class="form-control") }}
+                       {% if form_SignUp.confirm.errors %}
+                                {{ form_SignUp.confirm(class="form-control is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for erro in form_SignUp.confirm.errors  %}
+                                        {{ erro }}                                        
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                    {{ form_SignUp.confirm(class="form-control") }}
+                            {% endif %}
                     </div>
                 </fieldset>
                 <div class="d-grid gap-2 col-3 mx-auto mt-3">
