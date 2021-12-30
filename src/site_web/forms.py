@@ -21,3 +21,8 @@ class FormSignUp(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user: 
             raise ValidationError("E-mail Already Registered.")
+        
+class FormEditProfile(FlaskForm): 
+    username = StringField("Username", validators=[DataRequired()])
+    email = StringField("E-mail", validators=[DataRequired(), Email()])
+    button_EditProfile = SubmitField("Edit Profile")

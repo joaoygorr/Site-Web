@@ -1,6 +1,6 @@
 from flask import render_template, redirect, request, url_for, flash
 from site_web import app, database, bcrypt
-from site_web.forms import FormSignIn, FormSignUp
+from site_web.forms import FormSignIn, FormSignUp, FormEditProfile
 from site_web.models import User
 from flask_login import login_user, logout_user, current_user, login_required
 
@@ -72,3 +72,9 @@ def profile():
 def create_post():
     return render_template("create_post.html")
 
+@app.route("/profile/edit", methods=['GET', 'POST'])
+@login_required
+def edit_profile(): 
+    form = FormEditProfile()
+    profile_picture = url_for('static', filename=f'media/{current_user.profile_picture}')
+    return render_template("edit_profile.html", profile_picture=profile_picture, form=form)
