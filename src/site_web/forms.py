@@ -9,8 +9,6 @@ class FormSignIn(FlaskForm):
     remember_me = BooleanField("Remember-me")
     button_submitIn = SubmitField("Sign_In")
     
-            
-    
 class FormSignUp(FlaskForm): 
     username = StringField('Username', validators=[DataRequired(), Length(6, 20)])
     email = StringField("E-mail", validators=[DataRequired(), Email()])
