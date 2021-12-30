@@ -1,8 +1,9 @@
+import re
 from flask import render_template, redirect, request, url_for, flash
 from site_web import app, database, bcrypt
 from site_web.forms import FormSignIn, FormSignUp
 from site_web.models import User
-from flask_login import login_user
+from flask_login import login_user, logout_user, current_user
 
 @app.route("/")
 def home():
@@ -28,7 +29,7 @@ def login():
         if user and bcrypt.check_password_hash(user.password.encode('utf-8'), form_SignIn.password.data): 
             login_user(user, remember=form_SignIn.remember_me.data) 
             # Mensagem
-            flash(f"Login Successfully In Email: {form_SignIn.email.data}", "alert")
+            flash(f"Login Successfully In Email: {form_SignIn.email.data}", "alert-success")
             # Redirecionando 
             return redirect(url_for("home"))
         else: 
@@ -42,9 +43,24 @@ def login():
         database.session.add(user)
         database.session.commit()
         # Mensagem
-        flash(f"Account Successfully Created For Email: {form_SignUp.email.data}", "alert alert-success")
+        flash(f"Account Successfully Created For Email: {form_SignUp.email.data}", "alert-success")
         # Redirecionando
         return redirect(url_for("home"))
     
     return render_template("login.html", form_SignIn=form_SignIn, form_SignUp=form_SignUp)
     
+@app.route("/exit")
+def exit():
+    logout_user()
+    flash(f"Successfully Logged Out", "alert-success")
+    return redirect(url_for("home"))
+
+    
+@app.route("/profile")
+def profile():
+    return render_template("profile.html")
+
+@app.route("/post/create")
+def create_post():
+    return render_template("create_post.html")
+
