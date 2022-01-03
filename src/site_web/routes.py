@@ -112,6 +112,11 @@ def edit_profile():
     elif request.method == 'GET': # Mostra as informações já no campo 
         form.email.data = current_user.email 
         form.username.data = current_user.username
+        # Retornando os campos já marcados (Courses)
+        for field in form: 
+            if 'course_' in field.name: 
+                if field.label.text in current_user.courses: 
+                    field.data = True
         
     profile_picture = url_for('static', filename=f'media/{current_user.profile_picture}')
     return render_template("edit_profile.html", profile_picture=profile_picture, form=form)
