@@ -80,13 +80,21 @@ def save_image(img):
     name, extension = os.path.splitext(img.filename)
     name_archive = name + cod + extension
     full_path = os.path.join(app.root_path, 'static/media', name_archive)
-    
     size = (400, 400)
     img_reduced = Image.open(img)
     img_reduced.thumbnail(size)
     img_reduced.save(full_path)
     return name_archive
     
+def update_courses(form): 
+    list_courses = []
+    for field in form: 
+        if 'course_' in field.name: 
+            if field.data:
+                list_courses.append(field.label.text)
+    return ';'.join(list_courses)
+            
+
 @app.route("/profile/edit", methods=['GET', 'POST'])
 @login_required
 def edit_profile(): 
@@ -97,8 +105,9 @@ def edit_profile():
         if form.profile_picture.data: 
             name_image = save_image(form.profile_picture.data)     
             current_user.profile_picture = name_image
+        current_user.courses = update_courses(form)
         database.session.commit()
-        flash(f"Profile Successfully Updated", "alert-success")
+        flash("Profile Successfully Updated", "alert-success")
         return redirect(url_for('profile'))
     elif request.method == 'GET': # Mostra as informações já no campo 
         form.email.data = current_user.email 

@@ -44,6 +44,17 @@
                             {% endfor %}
                         {% endif %}
                     </div>
+                    <hr>
+                    <p>Courses</p>
+                    {% for field in form %}
+                        {% if 'course_' in field.name %}
+                            <div class="form-group mt-2">
+                                {{ field(class="form-check-input") }}
+                                {{ field.label(class="form-check-label") }}
+                            </div>    
+                        {% endif %}
+                    {% endfor %}
+                    
                 </fieldset>
                 <div class="d-grid gap-2 col-3 mx-auto mt-2">
                     {{ form.button_EditProfile(class="btn btn-outline-primary") }}

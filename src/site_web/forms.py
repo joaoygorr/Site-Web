@@ -28,6 +28,12 @@ class FormEditProfile(FlaskForm):
     username = StringField("Username", validators=[DataRequired()])
     email = StringField("E-mail", validators=[DataRequired(), Email()])
     profile_picture = FileField("Update Profile Picture", validators=[FileAllowed(['jpg', 'png'])])
+    course_python = BooleanField("Python")
+    course_nodejs = BooleanField("NodeJs")
+    course_js = BooleanField("JavaScript")
+    course_ts = BooleanField("TypeScript")
+    course_reactjs = BooleanField("ReactJs")
+    course_banco = BooleanField("Banco de Dados")
     button_EditProfile = SubmitField("Edit Profile")
     
     # Verificando se existe email igual no banco
