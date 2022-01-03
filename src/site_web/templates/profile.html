@@ -27,7 +27,7 @@
         >
           <div class="d-flex flex-column">
             <span class="articles">Courses</span>
-            {% if 'Not Informed' in current_user.courses%}
+            {% if 'Not Informed' in current_user.courses or current_user.courses == ' ' %}
               <span class="number1">0</span>
             {% else %}
               <span class="number1">{{ current_user.courses.count(';') + 1 }}</span>
@@ -52,9 +52,13 @@
 <div class="row justify-content-center">
   <div class="col col-4 text-center">
     <strong>Courses</strong><br>
-    {% for course in current_user.courses.split(';') %}
-      <button type="button" class="btn btn-success mt-2 fw-bolder" disabled>{{ course }}</button>
-    {% endfor %}
+    {% if current_user.courses %}
+      {% for course in current_user.courses.split(';') %}
+        <button type="button" class="btn btn-success mt-2 fw-bolder" disabled>{{ course }}</button>
+      {% endfor %}
+    {% else %}
+      <button type="button" class="btn btn-success mt-2 fw-bolder" disabled>No Courses Registered :(</button>
+    {% endif %}
   </div>
 </div>
 
