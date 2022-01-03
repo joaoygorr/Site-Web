@@ -44,7 +44,16 @@
                 <fieldset>
                     <div class="form-group">
                         {{ form_SignUp.username.label(class="form-label") }}
-                        {{ form_SignUp.username(class="form-control") }}
+                        {% if form_SignUp.username.errors %}
+                                {{ form_SignUp.username(class="form-control is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for erro in form_SignUp.username.errors  %}
+                                        {{ erro }}                                        
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                    {{ form_SignUp.username(class="form-control") }}
+                            {% endif %}
                     </div>
                     <div class="form-group">
                         {{ form_SignUp.email.label(class="form-label", placeholder="name@example.com") }}
@@ -61,7 +70,16 @@
                     </div>
                     <div class="form-group">
                         {{ form_SignUp.password.label(class="form-label") }}
-                        {{ form_SignUp.password(class="form-control") }}
+                        {% if form_SignUp.password.errors %}
+                                {{ form_SignUp.password(class="form-control is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for erro in form_SignUp.password.errors  %}
+                                        {{ erro }}                                        
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                    {{ form_SignUp.password(class="form-control") }}
+                            {% endif %}
                     </div>
                     <div class="form-group">
                         {{ form_SignUp.confirm.label(class="form-label") }}
