@@ -18,7 +18,8 @@ def contact():
 @app.route("/user")
 @login_required
 def user():
-    return render_template("user.html")
+    list_user = User.query.all()
+    return render_template("user.html", list_user=list_user)
 
 @app.route("/login", methods=['GET', 'POST'])
 def login(): 

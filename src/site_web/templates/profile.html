@@ -1,38 +1,26 @@
-{% extends 'base.html' %} {% block body %}
+{% extends 'base.html' %} 
+{% block body %}
 <div class="container mt-5 d-flex justify-content-center">
   <div class="card p-3 col-5 border-0 bg-light">
     <div class="d-flex align-items-center">
-      <div class="image me-2">
-        <img src="{{ profile_picture }}" class="rounded" width="155" />
-      </div>
-      <div class="ml-3 w-100">
+        <img src="{{ profile_picture }}" class="rounded img-thumbnail col-md-4 me-2"/>
+      <div class="col">
         <h4 class="mb-0 mt-0 text-capitalize">{{ current_user.username }}</h4>
         <span>{{ current_user.email }}</span>
-        <div
-          class="
-            p-2
-            mt-2
-            bg-primary
-            d-flex
-            justify-content-between
-            rounded
-            text-white
-            stats
-          "
-        >
+        <div class="p-2 mt-2 bg-white d-flex justify-content-evenly rounded">
           <div class="d-flex flex-column">
             <span class="articles">Courses</span>
-            {% if 'Not Informed' in current_user.courses or current_user.courses
-            == '' %}
-            <span class="number1">0</span>
+              {% if 'Not Informed' in current_user.courses or current_user.courses == '' %}
+              <span class="fw-bold">0</span>
             {% else %}
-            <span class="number1"
-              >{{ current_user.courses.count(';') + 1 }}</span
-            >
+              <span class="fw-bold">
+                {{ current_user.courses.count(';') + 1 }}
+              </span>
             {% endif %}
           </div>
           <div class="d-flex flex-column">
-            <span class="rating">Posts</span> <span class="number3">8.9</span>
+            <span class="rating">Posts</span> 
+            <span class="fw-bold">8.9</span>
           </div>
         </div>
         <div class="mt-2">
@@ -46,22 +34,24 @@
     </div>
   </div>
 </div>
-
-<div class="row justify-content-center">
-  <div class="col col-4 text-center">
-    <strong>Courses</strong><br />
-    {% if current_user.courses %} 
-      {% for course in current_user.courses.split(';') %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col col-4 text-center">
+      <strong>Courses</strong><br />
+      {% if current_user.courses %} 
+        {% for course in current_user.courses.split(';') %}
+          <button type="button" class="btn btn-success mt-2 fw-bolder" disabled>
+            {{ course }}
+          </button>
+        {% endfor %} 
+      {% else %}
         <button type="button" class="btn btn-success mt-2 fw-bolder" disabled>
-          {{ course }}
+        No Courses Registered :(
         </button>
-      {% endfor %} 
-    {% else %}
-      <button type="button" class="btn btn-success mt-2 fw-bolder" disabled>
-      No Courses Registered :(
-      </button>
-    {% endif %}
+      {% endif %}
+    </div>
   </div>
 </div>
-
-{% block edit_profile %} {% endblock edit_profile %} {% endblock body %}
+{% block edit_profile %} 
+{% endblock edit_profile %} 
+{% endblock body %}

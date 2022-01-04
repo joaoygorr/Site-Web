@@ -1,3 +1,53 @@
-{% extends 'base.html' %}
-{% block body %}
+{% extends 'base.html' %} 
+{% block body %} 
+    {% for user in list_user %}
+        <div class="container mt-5 d-flex justify-content-center">
+        <div class="card p-3 col-5 border-0 bg-light">
+            <div class="d-flex align-items-center">
+            <img
+                src="{{ url_for('static', filename='media/{}'.format(user.profile_picture)) }}"
+                class="rounded img-thumbnail col-md-4 me-2"/>
+            <div class="col">
+                <h4 class="mb-0 mt-0 text-capitalize">{{ user.username }}</h4>
+                <span>{{ user.email }}</span>
+                <div class="p-2 mt-2 bg-white d-flex justify-content-between rounded">
+                <div class="d-flex flex-column">
+                    <span class="articles">Courses</span>
+                    {% if 'Not Informed' in  user.courses or  user.courses == '' %}
+                        <span class="fw-bold">0</span>
+                    {% else %}
+                        <span class="fw-bold">
+                        {{ user.courses.count(';') + 1 }}
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="d-flex flex-column">
+                    <span class="rating">Posts</span>
+                    <span class="fw-bold">8.9</span>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+        <div class="container">
+        <div class="row justify-content-center">
+            <div class="col col-4 text-center">
+            <strong>Courses</strong><br />
+            {% if user.courses %} 
+                {% for course in user.courses.split(';') %}
+                    <button type="button" class="btn btn-success mt-2 fw-bolder" disabled>
+                        {{ course }}
+                    </button>
+                {% endfor %} 
+            {% else %}
+                <button type="button" class="btn btn-success mt-2 fw-bolder" disabled>
+                    No Courses Registered :(
+                </button>
+            {% endif %}
+            </div>
+        </div>
+        </div>
+    {% endfor %} 
+    <div class="row mt-5"></div>
 {% endblock body %}
