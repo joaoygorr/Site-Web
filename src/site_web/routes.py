@@ -49,6 +49,9 @@ def login():
         user = User(username=form_SignUp.username.data, email=form_SignUp.email.data, password=password_cript)
         database.session.add(user)
         database.session.commit()
+        # login depois de cadastrar
+        user = User.query.filter_by(email=form_SignIn.email.data).first()
+        login_user(user, remember=form_SignIn.remember_me.data) 
         # Mensagem
         flash(f"Account Successfully Created For Email: {form_SignUp.email.data}", "alert-success")
         # Redirecionando
