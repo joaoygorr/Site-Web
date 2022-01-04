@@ -6,7 +6,7 @@
             <div class="d-flex align-items-center">
             <img
                 src="{{ url_for('static', filename='media/{}'.format(user.profile_picture)) }}"
-                class="rounded img-thumbnail col-md-4 me-2"/>
+                class="rounded-circle img-thumbnail col-md-4 me-2"/>
             <div class="col">
                 <h4 class="mb-0 mt-0 text-capitalize">{{ user.username }}</h4>
                 <span>{{ user.email }}</span>

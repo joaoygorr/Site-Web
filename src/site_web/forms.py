@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed, FileField
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from site_web.models import User
 from flask_login import current_user
@@ -34,7 +34,7 @@ class FormEditProfile(FlaskForm):
     course_ts = BooleanField("TypeScript")
     course_reactjs = BooleanField("ReactJs")
     course_banco = BooleanField("Banco de Dados")
-    button_EditProfile = SubmitField("Edit Profile")
+    button_EditProfile = SubmitField("Confirm")
     
     # Verificando se existe email igual no banco
     def validate_email(self, email): 
@@ -42,4 +42,8 @@ class FormEditProfile(FlaskForm):
             user = User.query.filter_by(email=email.data).first()
             if user: 
                 raise ValidationError("There Is Already A User With This Email")
-        
+
+class FormCreatePost(FlaskForm): 
+    title = StringField("Title", validators=[DataRequired(), Length(5, 140)])
+    body = TextAreaField("What are you thinking about ?", validators=[DataRequired()])
+    button_submit = SubmitField("Create Post")

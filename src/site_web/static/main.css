@@ -3,7 +3,6 @@
     background-color: #f2b727;
 }
 
-/* Card-Post */
 .card {
     border-radius: 10px;
 }
@@ -21,4 +20,8 @@
 .rating {
     font-size: 10px;
     color: #a1aab9
+}
+
+.color02 { 
+    background-color: #d2d9df;
 }

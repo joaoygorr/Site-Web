@@ -1,7 +1,7 @@
 from flask import render_template, redirect, request, url_for, flash
 from site_web import app, database, bcrypt
-from site_web.forms import FormSignIn, FormSignUp, FormEditProfile
-from site_web.models import User
+from site_web.forms import FormSignIn, FormSignUp, FormEditProfile, FormCreatePost 
+from site_web.models import Post, User
 from flask_login import login_user, logout_user, current_user, login_required
 import secrets
 import os
@@ -9,7 +9,8 @@ from PIL import Image
 
 @app.route("/")
 def home():
-    return render_template("home.html")
+    posts = Post.query.order_by(Post.id.desc())
+    return render_template("home.html", posts=posts)
 
 @app.route("/contact")
 def contact():
@@ -66,18 +67,24 @@ def exit():
     logout_user()
     flash(f"Successfully Logged Out", "alert-success")
     return redirect(url_for("home"))
-
-    
+   
 @app.route("/profile")
 @login_required
 def profile():
     profile_picture = url_for('static', filename=f'media/{current_user.profile_picture}')
     return render_template("profile.html", profile_picture=profile_picture)
 
-@app.route("/post/create")
+@app.route("/post/create", methods=['GET', 'POST'])
 @login_required
 def create_post():
-    return render_template("create_post.html")
+    form = FormCreatePost()
+    if form.validate_on_submit(): 
+        post = Post(title=form.title.data, body=form.body.data, author=current_user)
+        database.session.add(post)
+        database.session.commit()
+        flash("Post Successfully Created", "alert-success")
+        return redirect(url_for("home"))
+    return render_template("create_post.html", form=form)
 
 def save_image(img): 
     cod = secrets.token_hex(8)
@@ -98,7 +105,6 @@ def update_courses(form):
                 list_courses.append(field.label.text)
     return ';'.join(list_courses)
             
-
 @app.route("/profile/edit", methods=['GET', 'POST'])
 @login_required
 def edit_profile(): 
