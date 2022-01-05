@@ -1,4 +1,4 @@
-from flask import render_template, redirect, request, url_for, flash
+from flask import render_template, redirect, request, url_for, flash, abort
 from site_web import app, database, bcrypt
 from site_web.forms import FormSignIn, FormSignUp, FormEditProfile, FormCreatePost 
 from site_web.models import Post, User
@@ -151,3 +151,15 @@ def display_post(post_id):
         form = None
     return render_template('post.html', post=post, form=form)
 
+@app.route("/post/<post_id>/delete", methods=['GET', 'POST'])
+@login_required
+def delete_post(post_id):
+    post = Post.query.get(post_id)
+    if current_user == post.author: 
+        database.session.delete(post)
+        database.session.commit()
+        flash("Post Successfully Deleted", "alert-success")
+        return redirect(url_for("home"))
+    else: 
+        abort(403)        
+    
