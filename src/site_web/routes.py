@@ -130,3 +130,9 @@ def edit_profile():
         
     profile_picture = url_for('static', filename=f'media/{current_user.profile_picture}')
     return render_template("edit_profile.html", profile_picture=profile_picture, form=form)
+
+@app.route("/post/<post_id>")
+def display_post(post_id): 
+    post = Post.query.get(post_id)
+    return render_template('post.html', post=post)
+    

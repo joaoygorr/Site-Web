@@ -1,9 +1,6 @@
 {% extends 'base.html' %}
 {% block body %}
     <div class="container">
-        <h1>Comunidade Geral - Hastag Treinamentos</h1>
-        <hr>
-        {% for post in posts %}
             <div class="row border mt-4 p-3 color02">
                 <div class="col col-2 text-center text-capitalize me-3">
                     <div class=""><img src="{{ url_for('static', filename='media/{}'.format(post.author.profile_picture)) }}" alt="profile_pricture" class="rounded-circle img-thumbnail"></div>
@@ -23,12 +20,11 @@
                         </div>
                 </div>
                 <div class="col col-9 ">
-                    <a class="text-decoration-none text-dark" href="{{ url_for('display_post', post_id=post.id) }}"><h3 class="text-capitalize">{{ post.title }}</h3></a>
+                    <h3 class="text-capitalize">{{ post.title }}</h3>
                     <hr>
                     <p>{{ post.body }}</p>
                 </div>
             </div>
-        {% endfor %}
     </div>
     <div class="row mt-5"></div>
 {% endblock body %}
