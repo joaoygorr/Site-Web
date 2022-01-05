@@ -10,3 +10,6 @@
 
 ### Instale as dependências
 #### pip install -r requirements.txt
+
+### Execute o Projeto
+#### python main.py
