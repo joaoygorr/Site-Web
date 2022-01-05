@@ -1,30 +1,114 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
 {% block body %}
     <div class="container">
-            <div class="row border mt-4 p-3 color02">
-                <div class="col col-2 text-center text-capitalize me-3">
-                    <div class=""><img src="{{ url_for('static', filename='media/{}'.format(post.author.profile_picture)) }}" alt="profile_pricture" class="rounded-circle img-thumbnail"></div>
-                    <strong>{{ post.author.username }}</strong>
-                        <div class="row justify-content-center">
-                                {% if post.author.courses %}
-                                    {% for course in post.author.courses.split(';') %}
-                                    <button type="button" class="btn btn-success mt-2 fw-bolder" disabled>
-                                        {{ course }}
-                                    </button>
-                                    {% endfor %}
-                                {% else %}
-                                    <button type="button" class="btn btn-success mt-2 fw-bolder" disabled>
-                                        No Courses Registered :(
-                                    </button>
-                                {% endif %}
-                        </div>
+        <div class="row border mt-4 p-3 color02">
+            <div class="col col-2 text-center text-capitalize me-3">
+                <div class="">
+                    <img
+                    src="{{ url_for('static', filename='media/{}'.format(post.author.profile_picture)) }}"
+                    alt="profile_pricture"
+                    class="rounded-circle img-thumbnail"
+                    />
                 </div>
-                <div class="col col-9 ">
-                    <h3 class="text-capitalize">{{ post.title }}</h3>
-                    <hr>
-                    <p>{{ post.body }}</p>
+                <strong>{{ post.author.username }}</strong>
+                <div class="row justify-content-center">
+                    {% if post.author.courses %} 
+                        {% for course in post.author.courses.split(';') %}
+                            <button type="button" class="btn btn-success mt-2 fw-bolder" disabled>
+                                {{ course }}
+                            </button>
+                        {% endfor %} 
+                    {% else %}
+                        <button type="button" class="btn btn-success mt-2 fw-bolder" disabled>
+                        No Courses Registered :(
+                        </button>
+                    {% endif %}
                 </div>
             </div>
+            <div class="col col-9">
+                <h3 class="text-capitalize">
+                    {{ post.title }}
+                    <small class="text-muted fs-6"> - Creation Date: {{ post.dt_create.strftime('%d/%m/%Y') }} 
+                        {% if form %}
+                            - <a href="#form_editpost"><button type="button" class="btn btn-primary ">Edit Post</button></a>
+                            <!-- Button trigger modal -->
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><button type="button" class="btn btn-danger" >Delete Post</button></a>
+                        {% endif %}
+                    </small> 
+                </h3> 
+                <hr />
+                <p>{{ post.body }}</p>
+            </div>
+        </div>
     </div>
     <div class="row mt-5"></div>
+
+    {% if form %}
+        <div class="container">
+            <hr />
+            <div class="row">
+                <div class="d-flex justify-content-center">
+                <form
+                    id="form_editpost"
+                    action="#"
+                    method="POST"
+                    class="border col-md-6 p-4 mt-1 bg-dark text-white rounded">
+                    {{ form.csrf_token }}
+                    <legend class="text-center">Edit Post</legend>
+                    <fieldset>
+                        <div class="form-group">
+                            {{ form.title.label(class="form-label") }} 
+                            {% if form.title.errors %} 
+                                {{ form.title(class="form-control is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for erro in form.title.errors %} 
+                                            {{ erro }} 
+                                        {% endfor %}
+                                    </div>
+                            {% else %} 
+                                {{ form.title(class="form-control", placeholder="Write Here..." ) }} 
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{ form.body.label(class="form-label") }} 
+                                {% if form.body.errors %}
+                                    {{ form.body(class="form-control is-invalid" ) }}
+                                    <div class="invalid-feedback">
+                                    {% for erro in form.body.errors %} 
+                                        {{ erro }} 
+                                    {% endfor %}
+                                    </div>
+                                {% else %} 
+                                {{ form.body(class="form-control", placeholder="Write Here..." ) }} 
+                            {% endif %}
+                        </div>
+                    </fieldset>
+                    <div class="d-grid gap-2 col-md-3 mx-auto mt-3">
+                        {{ form.button_submit(class="btn btn-outline-primary") }}
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5"></div>
+    {% endif %} 
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock body %}

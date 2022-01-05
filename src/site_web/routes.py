@@ -131,8 +131,23 @@ def edit_profile():
     profile_picture = url_for('static', filename=f'media/{current_user.profile_picture}')
     return render_template("edit_profile.html", profile_picture=profile_picture, form=form)
 
-@app.route("/post/<post_id>")
+@app.route("/post/<post_id>", methods=['GET', 'POST'])
+@login_required
 def display_post(post_id): 
     post = Post.query.get(post_id)
-    return render_template('post.html', post=post)
-    
+    if current_user == post.author: 
+        form = FormCreatePost()
+        # Editando Post
+        if request.method == "GET": 
+            form.title.data = post.title
+            form.body.data = post.body
+        elif form.validate_on_submit(): 
+            post.title = form.title.data
+            post.body = form.body.data
+            database.session.commit()
+            flash("Successfully Updated Post", "alert-success")
+            return redirect(url_for("home"))
+    else: 
+        form = None
+    return render_template('post.html', post=post, form=form)
+
