@@ -106,7 +106,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <form method="POST" action="{{ url_for('delete_post', post_id=post.id) }}" >
+                    <form method="POST" tabindex="-1" action="{{ url_for('delete_post', post_id=post.id) }}" >
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                 </div>

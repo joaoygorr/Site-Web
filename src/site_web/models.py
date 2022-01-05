@@ -17,6 +17,9 @@ class User(database.Model, UserMixin):
     courses = database.Column(database.String, nullable=False, default='Not Informed')
     posts = database.relationship('Post', backref='author', lazy=True)
     
+    def count_post(self): 
+        return len(self.posts)
+    
 class Post(database.Model): 
     id = database.Column(database.Integer, primary_key=True)
     title = database.Column(database.String, nullable=False)
