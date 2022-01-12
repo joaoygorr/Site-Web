@@ -13,14 +13,14 @@ python -m venv env
 
 That will create a new folder `env` in your project directory. Next activate it with this command on mac/linux:
 
-PowerShell:
+PowerShell or CMD:
 ```
 .\env\scripts\activate.ps1 
 ```
-CMD:
 ```
 .\env\scripts\activate.bat
 ```
+
 Then install the project dependencies with
 
 ```
