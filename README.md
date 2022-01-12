@@ -5,8 +5,6 @@
 # Site Flask
 This is a very simple website built with Flask.
 
----
-
 # Running this project
 To get this project up and running, you should start with Python installed on your computer. It is advisable to create a virtual environment to store your projects' dependencies separately. You can install the environment
 ```
