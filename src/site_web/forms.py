@@ -12,7 +12,7 @@ class FormSignIn(FlaskForm):
     button_submitIn = SubmitField("Sign_In")
     
 class FormSignUp(FlaskForm): 
-    username = StringField('Username', validators=[DataRequired(), Length(6, 20)])
+    username = StringField('Username (GitHub)', validators=[DataRequired(), Length(3, 20)])
     email = StringField("E-mail", validators=[DataRequired(), Email()])
     password = PasswordField("Password", validators=[DataRequired(), Length(6, 20)])
     confirm = PasswordField("Password Confirmation", validators=[DataRequired(), EqualTo('password')])
