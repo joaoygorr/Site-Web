@@ -11,9 +11,7 @@ To get this project up and running, you should start with Python installed on yo
 python -m venv env
 ```
 
-That will create a new folder `env` in your project directory. Next activate it with this command on mac/linux:
-
-PowerShell or CMD:
+That will create a new folder `env` in your project directory. Next activate it with this command on PowerShell or CMD:
 ```
 .\env\scripts\activate.ps1 
 ```
